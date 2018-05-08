@@ -16,7 +16,7 @@
     <div id="title-bar"></div>
 
     <div class="header">
-        <h1>Smoothie</h1>
+        <h1>Smoothie<span style="font-size: 14px; color:lightsalmon;">(alpha)</span></h1>
     </div>
 
     <x-box vertical class='items'>
@@ -27,9 +27,8 @@
                 <x-switch skin="big"></x-switch>
             </header>
             
-            <main id='networks'>
-
-            </main>
+                <main id='networks'>
+                </main>
             </x-card>
     </x-box>
 
@@ -37,8 +36,8 @@
     <!-- JS -->
     <script src="../node_modules/xel/xel.min.js"></script>
     <script>
-        require('./js/menu.js')
-        require('./js/dispatch-proxy-interface.js')
+        require('./js/title-bar.js')
+        require('./js/ui-controller.js')
     </script>
 </body>
 

@@ -1,3 +1,5 @@
+'use strict'
+
 const electron = require('electron')
 // Module to control application life.
 const app = electron.app
@@ -15,7 +17,7 @@ let mainWindow = null
 function createWindow () {
   // Create the browser window.
   mainWindow = new BrowserWindow({
-    // backgroundColor: '#2f3241',
+    backgroundColor: '#2f3241',
     width: 350, 
     height: 600,
     resizable: false,
