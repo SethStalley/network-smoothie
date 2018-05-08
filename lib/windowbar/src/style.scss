@@ -1,0 +1,231 @@
+.windowbar {
+	display: flex;
+	box-sizing: content-box;
+	
+	* { box-sizing: inherit; }
+	
+	&::after {
+		content: ' ';
+		display: table;
+		clear: both;
+	}
+	
+	&.draggable {
+		-webkit-app-region: drag;
+		
+		.windowbar-minimize,
+		.windowbar-maximize,
+		.windowbar-close {
+			-webkit-app-region: no-drag;
+		}
+	}
+	
+	.windowbar-controls::after {
+		content: ' ';
+		display: table;
+		clear: both;
+	}
+	
+	
+	&.wb-mac {
+		align-items: center;
+		justify-content: space-between;
+		padding: 0 3px;
+		
+		&:not(.transparent) { background-color: #e5e5e5; }
+		&.unfocused:not(.transparent) { background-color: #f6f6f6; }
+
+		.windowbar-controls {
+			&:hover {
+				svg {
+					opacity: 1 !important;
+				}
+			}
+		}
+
+		&.alt:not(.fullscreen) {
+			svg.fullscreen-svg {
+				display: none;
+			}
+
+			svg.maximize-svg {
+				display: block !important;
+			}
+		}
+		
+		&.fullscreen {
+			svg.fullscreen-svg {
+				display: none;
+			}
+
+			svg.exit-fullscreen-svg {
+				display: block !important;
+			}
+		}
+
+		.windowbar-close,
+		.windowbar-minimize,
+		.windowbar-maximize {
+			float: left;
+			width: 10px;
+			height: 10px;
+			border-radius: 50%;
+			margin: 6px 4px;
+			line-height: 0;
+		}
+
+		.windowbar-close {
+			border: 1px solid #e94343;
+			background-color: #ff5d5b;
+			margin-left: 6px;
+
+			&:active {
+				border-color: #b43737;
+				background-color: #c64845;
+			}
+
+			svg {
+				width: 6px;
+				height: 6px;
+				margin-top: 2px;
+				margin-left: 2px;
+				opacity: 0;
+			}
+		}
+
+		.windowbar-minimize {
+			border: 1px solid #e5a03a;
+			background-color: #ffbc45;
+
+			&:active {
+				border-color: #b07b2e;
+				background-color: #c38e34;
+			}
+
+			svg {
+				width: 8px;
+				height: 8px;
+				margin-top: 1px;
+				margin-left: 1px;
+				opacity: 0;
+			}
+		}
+
+		.windowbar-maximize {
+			border: 1px solid #13ad3e;
+			background-color: #00c94f;
+			
+			&:active {
+				border-color: #138532;
+				background-color: #009a3c;
+			}
+
+			svg.fullscreen-svg {
+				width: 6px;
+				height: 6px;
+				margin-top: 2px;
+				margin-left: 2px;
+				opacity: 0;
+			}
+			
+			svg.exit-fullscreen-svg {
+				width: 10px;
+				height: 10px;
+				margin-top: 0;
+				margin-left: 0;
+				opacity: 0;
+				display: none;
+			}
+			
+			svg.maximize-svg {
+				width: 8px;
+				height: 8px;
+				margin-top: 1px;
+				margin-left: 1px;
+				opacity: 0;
+				display: none;
+			}
+		}
+
+		&.unfocused .windowbar-controls:not(:hover) > * {
+			background-color: #dcdcdc;
+			border-color: #d1d1d1;
+		}
+	}
+	
+	
+	&.wb-win {
+		justify-content: flex-end;
+		padding: 0;
+		
+		&:not(.transparent) { background-color: #fff; }
+		
+		&.unfocused .windowbar-controls:not(:hover) svg {
+			opacity: 60%;
+		}
+
+		.windowbar-minimize,
+		.windowbar-maximize,
+		.windowbar-close {
+			float: left;
+			width: 45px;
+			height: 29px;
+			margin: 0 0 1px 1px;
+			text-align: center;
+			line-height: 29px;
+
+			-webkit-transition: background-color .2s;
+			-moz-transition: background-color .2s;
+			-ms-transition: background-color .2s;
+			-o-transition: background-color .2s;
+			transition: background-color .2s;
+			
+			svg {
+				width: 10px;
+				height: 10px;
+			}
+		}
+		
+		.windowbar-close svg polygon {
+			-webkit-transition: fill .2s;
+			-moz-transition: fill .2s;
+			-ms-transition: fill .2s;
+			-o-transition: fill .2s;
+			transition: fill .2s;
+		}
+		
+		&.fullscreen {
+			.windowbar-minimize,
+			.windowbar-maximize,
+			.windowbar-close {
+				height: 21px;
+				line-height: 21px;
+			}
+		}
+
+		&:not(.fullscreen) .windowbar-maximize svg.unmaximize-svg { display: none; }
+		&.fullscreen .windowbar-maximize svg.maximize-svg { display: none; }
+
+		.windowbar-minimize:hover,
+		.windowbar-maximize:hover {
+			background-color: rgba(127,127,127, 0.2);
+		}
+		.windowbar-close:hover {
+			background-color: #E81123;
+			
+			svg polygon {
+				fill: #fff;
+			}
+		}
+		
+		&.dark {
+			&:not(.transparent) { background-color: #1f1f1f; }
+			
+			svg {
+				> rect, > polygon, > path {
+					fill: #fff;
+				}
+			}
+		}
+	}
+}

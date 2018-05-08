@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Windowbar demo</title>
+	<style>
+	
+	body {
+		background: #ccc;
+	}
+	
+	</style>
+</head>
+<body>
+	<script type="text/javascript" src="../dist/index.js"></script>
+	<script type="text/javascript">
+		
+		var log = function(name){
+			return function(e){
+				console.log(name, e);
+			};
+		};
+
+		var wm = new windowbar({'style':'mac', 'draggable':true, 'dblClickable':false})
+			.on('close', log('close'))
+			.on('minimize', log('minimize'))
+			.on('fullscreen', log('fullscreen'))
+			.on('maximize', log('maximize'))
+			.appendTo(document.body);
+		
+		document.write('<br>');
+		
+		var ww = new windowbar({'style':'win', 'draggable':false, 'dblClickable':true})
+			.on('close', log('close'))
+			.on('minimize', log('minimize'))
+			.on('maximize', log('maximize'))
+			.appendTo(document.body);
+		
+		document.write('<br>');
+		
+		var ww = new windowbar({'style':'win', 'dark':true, 'draggable':false, 'dblClickable':true})
+			.on('close', log('close'))
+			.on('minimize', log('minimize'))
+			.on('maximize', log('maximize'))
+			.appendTo(document.body);
+	
+	</script>
+</body>
+</html>

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="../node_modules/xel/themes/material.css">
+    <link rel="stylesheet" href="css/style.css">
+
+    <title>ISP Smoothie</title>
+
+</head>
+
+<body class='window'>
+
+    <div id="title-bar"></div>
+
+    <div class="header">
+        <h1>Smoothie</h1>
+    </div>
+
+    <x-box vertical class='items'>
+        <x-card>
+            <header>
+                <h3 style="text-align: left;">Networks</h3>
+                <p style="padding-right: 5px;">enable</p>
+                <x-switch skin="big"></x-switch>
+            </header>
+            
+            <main id='networks'>
+
+            </main>
+            </x-card>
+    </x-box>
+
+
+    <!-- JS -->
+    <script src="../node_modules/xel/xel.min.js"></script>
+    <script>
+        require('./js/menu.js')
+        require('./js/dispatch-proxy-interface.js')
+    </script>
+</body>
+
+</html>

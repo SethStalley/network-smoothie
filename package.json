@@ -1,0 +1,21 @@
+{
+  "name": "isp-smoothie",
+  "version": "1.0.0",
+  "description": "Bond multiple internet service providers to boost internet speed.",
+  "main": "src/app.js",
+  "scripts": {
+    "start": "cross-env NODE_ENV=dev electron ."
+  },
+  "author": {
+    "name": "Seth Stalley"
+  },
+  "license": "MIT",
+  "devDependencies": {
+    "cross-env": "^5.1.4",
+    "electron": "^2.0.0"
+  },
+  "dependencies": {
+    "commander": "^2.15.1",
+    "xel": "0.0.135"
+  }
+}
