@@ -10,7 +10,7 @@ module.exports = class WindowsProxy {
         this.port = '1080'
     }
 
-    _refreshIE() {
+    _refreshIE(callback=null) {
         const ps = new shell({
             executionPolicy: 'Bypass',
             noProfile: true
@@ -21,6 +21,8 @@ module.exports = class WindowsProxy {
         ps.invoke()
         .then(output => {
             console.log(output)
+            if (callback)
+                callback()
         })
         .catch(err => {
             console.log(err)
@@ -57,17 +59,14 @@ module.exports = class WindowsProxy {
             if (err)
                 console.log(`Failed to disable proxy in registry`, err)
         
-            ins._refreshIE()
-            if (callback)
-                callback()
+            ins._refreshIE(callback)
         })
     }
 
     enableSocksProxy() {
         const ins = this
         let values = this._formRegistryObj(1)
-
-        console.log(values)
+        
         regedit.putValue(values, function(err) {
             if (err)
                 console.log(`Failed to enable proxy in registry`, err)

@@ -23,4 +23,4 @@ npm start
 
 ## Disclaimer
 
-Smoothie works thanks to the backend work done by Morhhaus. This project aims to add an easy to use front-end for Morhau's [dispatch-proxy](https://github.com/Morhaus/dispatch-proxy) as well as place to make additions and improvements to the original backend, since said project has not been active in years.
+Smoothie works thanks to the backend work done by Morhaus. This project aims to add an easy to use front-end to Morhaus's [dispatch-proxy](https://github.com/Morhaus/dispatch-proxy) as well as being a place where additions and improvements can be made to the original backend - since said project has not been active in years.

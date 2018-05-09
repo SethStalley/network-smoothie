@@ -35,6 +35,7 @@ module.exports = class DispatchInterface {
             let internal = false
             let adapter =  {
                 'name':name,
+                'priority': 1
             }
 
             for (i = 0, len = addrs.length; i < len && addrs; i ++) {
@@ -48,20 +49,22 @@ module.exports = class DispatchInterface {
         return results; 
     }
 
-    startSocks(addresses) {
+    startSocks() {
         this.running = true
 
         const port = 1080
         const host = 'localhost'
-        const proxy = new SocksProxy(addresses, port, host)
+        const addresses = this.getNetworkAdapters()
+        this.socksProxy = new SocksProxy(addresses, port, host)
         
         let ins = this
 
-        proxy.on('request', function({serverConnection, clientConnection, host, port, localAddress}) {
+        this.socksProxy.on('request', function({serverConnection, clientConnection, host, port, localAddress}) {
             
             //stop service if it's not longer enabled
             if (ins.running !== true) {
-                proxy.stop()
+                this.socksProxy.stop()
+                this.socksProxy = null
                 return
             }
 

@@ -3,7 +3,7 @@
 const DispatchInterface = require('./DispatchInterface')
 const WindowsProxy = require('./WindowsProxy')
 
-const dispatchInterface = new DispatchInterface()
+let dispatchInterface = new DispatchInterface()
 const windows = new WindowsProxy()
 
 function setNetworks() {
@@ -25,31 +25,10 @@ function setNetworks() {
     document.getElementById('networks').innerHTML = allCardsFormatted
 }
 
-function bondNetworks() {
-    const addresses = dispatchInterface.getNetworkAdapters()
-    if (addresses) {
-        let priorityAddresses = []
-        for (let i=0; i<addresses.length; i++) {
-            priorityAddresses.push({
-                'address': addresses[i].address,
-                'priority': 1
-            })
-        }
-
-        console.log(priorityAddresses)
-
-        dispatchInterface.startSocks(priorityAddresses)
-        return true
-    }
-    
-    console.log(`Error:`, 'No network addresses available.')
-    return false
-}
-
 function startBonding() {
     console.log("Starting service.")
+    dispatchInterface.startSocks()
     document.getElementById('label-enable-service').innerHTML = 'on'
-    return bondNetworks()
 }
 
 function stopBonding() {
@@ -59,7 +38,6 @@ function stopBonding() {
 }
 
 setNetworks()
-// bondNetworks()
 
 /*
     UI Controls
