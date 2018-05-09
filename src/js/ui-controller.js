@@ -26,9 +26,19 @@ function setNetworks() {
 }
 
 function bondNetworks() {
-    const address = dispatchInterface.getNetworkAdapters()
-    if (address) {
-        dispatchInterface.startSocks(address)
+    const addresses = dispatchInterface.getNetworkAdapters()
+    if (addresses) {
+        let priorityAddresses = []
+        for (let i=0; i<addresses.length; i++) {
+            priorityAddresses.push({
+                'address': addresses[i].address,
+                'priority': 1
+            })
+        }
+
+        console.log(priorityAddresses)
+
+        dispatchInterface.startSocks(priorityAddresses)
         return true
     }
     
@@ -44,7 +54,7 @@ function startBonding() {
 
 function stopBonding() {
     console.log("Stopping service.")
-    dispatchInterface.stopService()
+    dispatchInterface.stop()
     document.getElementById('label-enable-service').innerHTML = 'off'
 }
 
@@ -63,8 +73,8 @@ mainSwitch.onclick = ()=> {
         stopBonding()
         this.running = false
     } else {
-        this.running = startBonding()
-        if (this.running)
-            windows.enableSocksProxy()
+        this.running = true
+        startBonding()
+        windows.enableSocksProxy()
     }
 }

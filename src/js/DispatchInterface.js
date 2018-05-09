@@ -101,7 +101,7 @@ module.exports = class DispatchInterface {
         })
     }
 
-    stopService() {
+    stop() {
         this.running = false
     }
 
