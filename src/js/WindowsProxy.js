@@ -49,7 +49,7 @@ module.exports = class WindowsProxy {
         return values
     }
 
-    disableSocksProxy() {
+    disableSocksProxy(callback=null) {
         const ins = this
         let values = this._formRegistryObj(0)
     
@@ -58,6 +58,8 @@ module.exports = class WindowsProxy {
                 console.log(`Failed to disable proxy in registry`, err)
         
             ins._refreshIE()
+            if (callback)
+                callback()
         })
     }
 

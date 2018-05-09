@@ -10,9 +10,9 @@ Open Smoothie and flip the switch to start blending. That's it!
 
 ## Installation
 
-**Note*: At present this project will only work on Windows. The app is built with electron so Mac/Linux support is planned. Send a pr if you want to help add it :wink:
+**Note**: At present this project will only work on Windows. The app is built with electron so Mac/Linux support is planned. Send a pr if you want to help add it :wink:
 
-You'll need Node installed on your system.
+You'll need Node and PowerShell installed on your system.
 
 ```sh
 git clone https://github.com/SethStalley/network-smoothie.git
@@ -23,4 +23,4 @@ npm start
 
 ## Disclaimer
 
-Smoothie works thanks to the backend work done by Morhhaus. This project aims to add an easy to use front-end for Morhau's [dispatch-proxy](https://github.com/Morhaus/dispatch-proxy) as well as place to make additions and improvements to the original backend, sense said project has not been active in years.
+Smoothie works thanks to the backend work done by Morhhaus. This project aims to add an easy to use front-end for Morhau's [dispatch-proxy](https://github.com/Morhaus/dispatch-proxy) as well as place to make additions and improvements to the original backend, since said project has not been active in years.
