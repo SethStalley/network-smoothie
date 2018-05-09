@@ -1,5 +1,10 @@
 'use strict'
 
+require("babel-core").transform("code", {
+  plugins: ["transform-runtime"]
+})
+
+
 const electron = require('electron')
 // Module to control application life.
 const app = electron.app

@@ -20,7 +20,8 @@ module.exports = class DispatchInterface {
 
     constructor() {
         const signals = os.constants.signals
-
+        this.socksProxy = null
+        this.running = false
     }
 
     getNetworkAdapters() {
@@ -36,8 +37,8 @@ module.exports = class DispatchInterface {
                 'name':name,
             }
 
-            for (i = 0, len = addrs.length; i < len; i ++) {
-                ( {address, family, internal} = addrs[i]); 
+            for (i = 0, len = addrs.length; i < len && addrs; i ++) {
+                ( {address, family, internal} = addrs[i]);
                 adapter.address = address
             }
 
@@ -48,11 +49,22 @@ module.exports = class DispatchInterface {
     }
 
     startSocks(addresses) {
-        const port = 1080;
-        const host = 'localhost';
-        const proxy = new SocksProxy(addresses, port, host);
+        this.running = true
+
+        const port = 1080
+        const host = 'localhost'
+        const proxy = new SocksProxy(addresses, port, host)
+        
+        let ins = this
 
         proxy.on('request', function({serverConnection, clientConnection, host, port, localAddress}) {
+            
+            //stop service if it's not longer enabled
+            if (ins.running !== true) {
+                proxy.stop()
+                return
+            }
+
             var id;
             id = (crypto.randomBytes(3)).toString('hex')
             console.log('request', `[${id}] <a>${host}</><b>:${port}</>`)
@@ -87,6 +99,10 @@ module.exports = class DispatchInterface {
             console.log('stackerror', `socks\n${escape(err.message)}`)
             return 'stackerror'
         })
+    }
+
+    stopService() {
+        this.running = false
     }
 
 }

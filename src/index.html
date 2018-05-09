@@ -22,9 +22,10 @@
     <x-box vertical class='items'>
         <x-card>
             <header>
-                <h3 style="text-align: left;">Networks</h3>
-                <p style="padding-right: 5px;">enable</p>
-                <x-switch skin="big"></x-switch>
+                <h3 style="text-align: left;">Bonding</h3>
+                <x-label style="padding-right: 5px";><strong id='label-enable-service'>off</strong></x-label>
+                <x-switch id="enable-service" onchange="mainToggle" skin="big"></x-switch>
+                
             </header>
             
                 <main id='networks'>

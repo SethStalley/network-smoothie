@@ -1,7 +1,10 @@
 'use strict'
 
 const DispatchInterface = require('./DispatchInterface')
+const WindowsProxy = require('./WindowsProxy')
+
 const dispatchInterface = new DispatchInterface()
+const windows = new WindowsProxy()
 
 function setNetworks() {
     const networkAdapters = dispatchInterface.getNetworkAdapters()
@@ -24,8 +27,44 @@ function setNetworks() {
 
 function bondNetworks() {
     const address = dispatchInterface.getNetworkAdapters()
-    dispatchInterface.startSocks(address)
+    if (address) {
+        dispatchInterface.startSocks(address)
+        return true
+    }
+    
+    console.log(`Error:`, 'No network addresses available.')
+    return false
+}
+
+function startBonding() {
+    console.log("Starting service.")
+    document.getElementById('label-enable-service').innerHTML = 'on'
+    return bondNetworks()
+}
+
+function stopBonding() {
+    console.log("Stopping service.")
+    dispatchInterface.stopService()
+    document.getElementById('label-enable-service').innerHTML = 'off'
 }
 
 setNetworks()
 // bondNetworks()
+
+/*
+    UI Controls
+*/
+
+// Main start/stop toggle
+const mainSwitch = document.getElementById('enable-service')
+mainSwitch.onclick = ()=> {
+    if (this.running) {
+        windows.disableSocksProxy()
+        stopBonding()
+        this.running = false
+    } else {
+        this.running = startBonding()
+        if (this.running)
+            windows.enableSocksProxy()
+    }
+}

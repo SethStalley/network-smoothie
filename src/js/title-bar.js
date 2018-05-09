@@ -1,6 +1,11 @@
+'use strict'
+
 var remote = require('electron').remote
-var mainWindow = remote.getCurrentWindow()
 const Windowbar = require('../../lib/windowbar/src/index')
+const WindowsProxy = require('./WindowsProxy')
+
+var mainWindow = remote.getCurrentWindow()
+const windows = new WindowsProxy()
 
 const isMac = process.platform === 'darwin'
 const style = isMac ? 'mac' : 'windows';
@@ -14,6 +19,7 @@ t.on('minimize', function(e) {
 });
 
 t.on('close', function(e) {
+	windows.disableSocksProxy()
 	mainWindow.close()
 });
 
