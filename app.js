@@ -9,7 +9,7 @@ const isMac = process.platform === 'darwin'
 
 const path = require('path')
 const url = require('url')
-const WindowsProxy = require('./js/WindowsProxy')
+const WindowsProxy = require('./src/js/WindowsProxy')
 
 const windows = new WindowsProxy()
 

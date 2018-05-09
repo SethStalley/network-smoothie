@@ -21,6 +21,7 @@ module.exports = class WindowsProxy {
         ps.invoke()
         .then(output => {
             console.log(output)
+            ps.dispose()
             if (callback)
                 callback()
         })

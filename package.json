@@ -1,8 +1,8 @@
 {
-  "name": "isp-smoothie",
-  "version": "1.0.0",
+  "name": "network-smoothie",
+  "version": "0.1.0",
   "description": "Bond multiple internet service providers to boost internet speed.",
-  "main": "src/app.js",
+  "main": "app.js",
   "scripts": {
     "start": "cross-env NODE_ENV=dev electron ."
   },
@@ -18,7 +18,6 @@
     "commander": "^2.15.1",
     "node-powershell": "^3.3.1",
     "regedit": "^3.0.0",
-    "windows": "0.0.7",
     "xel": "0.0.135"
   }
 }

@@ -12,9 +12,11 @@ function setNetworks() {
     let allCardsFormatted = ''
     for (let i=0; i<networkAdapters.length; i++) {
         const {name, address} = networkAdapters[i]
+        const icon = name.includes('net') ? 'code' : 'wifi';
         const card = `
             <x-card>
                 <header>
+                    <x-icon name="${icon}" style="padding-right: 3%;"></x-icon>
                     <strong>${name}</strong>
                     <span style="padding-left: 1%; font-size: 14px;">(${address})</span>
                 </header>
@@ -37,8 +39,6 @@ function stopBonding() {
     document.getElementById('label-enable-service').innerHTML = 'off'
 }
 
-setNetworks()
-
 /*
     UI Controls
 */
@@ -47,6 +47,7 @@ setNetworks()
 const mainSwitch = document.getElementById('enable-service')
 mainSwitch.onclick = ()=> {
     if (this.running) {
+        setNetworks()
         windows.disableSocksProxy()
         stopBonding()
         this.running = false
@@ -56,3 +57,10 @@ mainSwitch.onclick = ()=> {
         windows.enableSocksProxy()
     }
 }
+
+setNetworks()
+// If not running then pool network list.
+setInterval(()=> {
+    if(!this.running)
+        setNetworks()
+}, 5000)
