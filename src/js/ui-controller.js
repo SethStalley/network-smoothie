@@ -31,12 +31,14 @@ function startBonding() {
     console.log("Starting service.")
     dispatchInterface.startSocks()
     document.getElementById('label-enable-service').innerHTML = 'on'
+    document.getElementById('main-card').style = "background-color: #009788;"
 }
 
 function stopBonding() {
     console.log("Stopping service.")
     dispatchInterface.stop()
     document.getElementById('label-enable-service').innerHTML = 'off'
+    document.getElementById('main-card').style = ""
 }
 
 /*
@@ -63,4 +65,4 @@ setNetworks()
 setInterval(()=> {
     if(!this.running)
         setNetworks()
-}, 5000)
+}, 10000)
