@@ -8,6 +8,14 @@ module.exports = class WindowsProxy {
     constructor() {
         this.host = 'localhost'
         this.port = '1080'
+
+        // Powershell script to refresh windows proxy settings. 
+        // Here as a string because relative paths don't play well with `node-powershell` & electron packages.
+        this.refresh_ps = `
+                        $signature = '[DllImport("wininet.dll", SetLastError = true, CharSet=CharSet.Auto)]public static extern bool InternetSetOption(IntPtr hInternet, int dwOption, IntPtr lpBuffer, int dwBufferLength);'
+                        $INTERNET_OPTION_REFRESH            = 37
+                        $type = Add-Type -MemberDefinition $signature -Name wininet -Namespace pinvoke -PassThru
+                        $type::InternetSetOption(0, $INTERNET_OPTION_REFRESH, 0, 0)`
     }
 
     _refreshIE(callback=null) {
@@ -16,7 +24,7 @@ module.exports = class WindowsProxy {
             noProfile: true
         })
 
-        ps.addCommand('./lib/powershell/refreshIE.ps1');
+        ps.addCommand(this.refresh_ps);
 
         ps.invoke()
         .then(output => {
@@ -28,6 +36,8 @@ module.exports = class WindowsProxy {
         .catch(err => {
             console.log(err)
             ps.dispose()
+            if (callback)
+                callback()
         });
     }
 

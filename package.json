@@ -1,18 +1,31 @@
 {
   "name": "network-smoothie",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Bond multiple internet service providers to boost internet speed.",
   "main": "app.js",
+  "author": {
+    "name": "Seth Stalley",
+    "email": "sethstalley@gmail.com"
+  },
   "scripts": {
+    "dist": "build",
+    "pack": "build --dir",
+    "postinstall": "isntall-app-deps",
     "start": "cross-env NODE_ENV=dev electron ."
   },
-  "author": {
-    "name": "Seth Stalley"
+  "build": {
+    "appId": "com.electron.smoothie",
+    "productName": "Smoothie",
+    "win": {
+      "target": "squirrel"
+    }
   },
   "license": "MIT",
   "devDependencies": {
     "cross-env": "^5.1.4",
     "electron": "^2.0.0",
+    "electron-builder": "^20.13.3",
+    "electron-builder-squirrel-windows": "^20.13.1",
     "eslint-config-airbnb": "^16.1.0",
     "eslint-plugin-import": "^2.11.0",
     "eslint-plugin-jsx-a11y": "^6.0.3",
