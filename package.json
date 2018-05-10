@@ -33,7 +33,6 @@
   "license": "MIT",
   "devDependencies": {
     "cross-env": "^5.1.4",
-    "dot-env": "0.0.1",
     "electron": "^2.0.0",
     "electron-builder": "^20.13.3",
     "eslint-config-airbnb": "^16.1.0",
