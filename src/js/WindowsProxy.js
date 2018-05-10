@@ -61,7 +61,7 @@ module.exports = class WindowsProxy {
 
         return values
     }
-
+    
     disableSocksProxy(callback=null) {
         const ins = this
         let values = this._formRegistryObj(0)
@@ -77,7 +77,7 @@ module.exports = class WindowsProxy {
     enableSocksProxy() {
         const ins = this
         let values = this._formRegistryObj(1)
-        
+
         regedit.putValue(values, function(err) {
             if (err)
                 console.log(`Failed to enable proxy in registry`, err)

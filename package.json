@@ -1,6 +1,13 @@
 {
   "name": "network-smoothie",
-  "version": "0.1.1",
+  "version": "0.1.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/SethStalley/network-smoothie"
+  },
+  "bugs": {
+    "url": "https://github.com/SethStalley/network-smoothie/issues"
+  },
   "description": "Bond multiple internet service providers to boost internet speed.",
   "main": "app.js",
   "author": {
@@ -10,22 +17,25 @@
   "scripts": {
     "dist": "build",
     "pack": "build --dir",
-    "postinstall": "isntall-app-deps",
+    "postinstall": "install-app-deps",
+    "release": "build -p onTagOrDraft",
     "start": "cross-env NODE_ENV=dev electron ."
   },
   "build": {
     "appId": "com.electron.smoothie",
     "productName": "Smoothie",
+    "asar": "false",
     "win": {
-      "target": "squirrel"
+      "target": "nsis",
+      "icon": "build/icon.ico"
     }
   },
   "license": "MIT",
   "devDependencies": {
     "cross-env": "^5.1.4",
+    "dot-env": "0.0.1",
     "electron": "^2.0.0",
     "electron-builder": "^20.13.3",
-    "electron-builder-squirrel-windows": "^20.13.1",
     "eslint-config-airbnb": "^16.1.0",
     "eslint-plugin-import": "^2.11.0",
     "eslint-plugin-jsx-a11y": "^6.0.3",
@@ -33,6 +43,7 @@
   },
   "dependencies": {
     "commander": "^2.15.1",
+    "electron-updater": "^2.21.10",
     "node-powershell": "^3.3.1",
     "regedit": "^3.0.0",
     "xel": "0.0.135"

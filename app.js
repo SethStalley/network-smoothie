@@ -1,8 +1,12 @@
 'use strict'
 
 const electron = require('electron')
+const autoUpdater = require('electron-updater').autoUpdater
+
 // Module to control application life.
 const app = electron.app
+const ipcMain = electron.ipcMain
+
 // Module to create native browser window.
 const BrowserWindow =  electron.BrowserWindow
 const isMac = process.platform === 'darwin'
@@ -32,9 +36,10 @@ function createWindow () {
     // Open the DevTools.
     mainWindow.webContents.openDevTools()
   }
-  
+
   mainWindow.once('ready-to-show', ()=> {
     mainWindow.show()
+    autoUpdater.checkForUpdates()
   })
 
   // and load the index.html of the app.
@@ -73,4 +78,14 @@ app.on('activate', function () {
   if (mainWindow === null) {
     createWindow()
   }
+})
+
+// when the update has been downloaded and is ready to be installed, notify the BrowserWindow
+autoUpdater.on('update-downloaded', (info) => {
+  mainWindow.webContents.send('updateReady')
+});
+
+// when receiving a quitAndInstall signal, quit and install the new version ;)
+ipcMain.on("quitAndInstall", (event, arg) => {
+  autoUpdater.quitAndInstall();
 })

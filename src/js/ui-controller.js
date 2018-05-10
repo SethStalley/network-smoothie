@@ -1,10 +1,16 @@
 'use strict'
 
+const ipcRenderer = require('electron').ipcRenderer;
 const DispatchInterface = require('./DispatchInterface')
 const WindowsProxy = require('./WindowsProxy')
 
 let dispatchInterface = new DispatchInterface()
 const windows = new WindowsProxy()
+
+const mainSwitchElement = document.getElementById('enable-service')
+const updateDialogElement = document.getElementById('update-dialog')
+const agreeUpdateBtn = document.getElementById('agree-update-button')
+const disagreeUpdateBtn = document.getElementById('disagree-update-button')
 
 function setNetworks() {
     const networkAdapters = dispatchInterface.getNetworkAdapters()
@@ -42,12 +48,22 @@ function stopBonding() {
 }
 
 /*
-    UI Controls
+    UI Actions
 */
+function openUpdateDialog() {
+    updateDialogElement.setAttribute('open', '')
+}
 
+function closeUpdateDialog() {
+    updateDialogElement.removeAttribute('open')
+}
+
+
+/*
+    Event Listeners
+*/
 // Main start/stop toggle
-const mainSwitch = document.getElementById('enable-service')
-mainSwitch.onclick = ()=> {
+mainSwitchElement.onclick = ()=> {
     if (this.running) {
         setNetworks()
         windows.disableSocksProxy()
@@ -59,6 +75,19 @@ mainSwitch.onclick = ()=> {
         windows.enableSocksProxy()
     }
 }
+
+disagreeUpdateBtn.onclick = ()=> {
+    closeUpdateDialog()
+}
+
+agreeUpdateBtn.onclick = ()=> {
+    ipcRenderer.send('quitAndInstall')
+}
+
+// wait for an updateReady message
+ipcRenderer.on('updateReady', function(event, text) {
+    openUpdateDialog()
+})
 
 setNetworks()
 // If not running then pool network list.

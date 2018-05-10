@@ -32,6 +32,22 @@
             </x-card>
     </x-box>
 
+    <dialog id='update-dialog'>
+        <main>
+            <h4>Update Available!</h4>
+            <p>Install now?</p>
+        </main>
+    
+        <footer>
+        <x-button id="disagree-update-button">
+            <x-label>Disagree</x-label>
+        </x-button>
+        <x-button toggled id="agree-update-button">
+            <x-label>Agree</x-label>
+        </x-button>
+        </footer>
+    </dialog>
+
 
     <!-- JS -->
     <script src="./node_modules/xel/xel.min.js"></script>
