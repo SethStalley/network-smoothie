@@ -32,17 +32,17 @@
   },
   "license": "MIT",
   "devDependencies": {
-    "cross-env": "^5.1.4",
-    "electron": "^2.0.0",
-    "electron-builder": "^20.13.3",
+    "cross-env": "^5.2.1",
+    "electron": "^2.0.18",
+    "electron-builder": "^20.44.4",
     "eslint-config-airbnb": "^16.1.0",
-    "eslint-plugin-import": "^2.11.0",
-    "eslint-plugin-jsx-a11y": "^6.0.3",
-    "eslint-plugin-react": "^7.7.0"
+    "eslint-plugin-import": "^2.22.1",
+    "eslint-plugin-jsx-a11y": "^6.3.1",
+    "eslint-plugin-react": "^7.21.5"
   },
   "dependencies": {
-    "commander": "^2.15.1",
-    "electron-updater": "^2.21.10",
+    "commander": "^2.20.3",
+    "electron-updater": "^2.23.3",
     "node-powershell": "^3.3.1",
     "regedit": "^3.0.0",
     "xel": "0.0.135"
