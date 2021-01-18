@@ -1,6 +1,6 @@
 'use strict'
 
-var HttpProxy, Logger, SocksProxy, crypto, inspect, logger, os, pkg, program, 
+var SocksProxy, crypto, inspect, os, program, 
   splice = [].splice
 
 os = require('os')
@@ -31,7 +31,6 @@ module.exports = class DispatchInterface {
         for (name in interfaces) {
             addrs = interfaces[name]; 
 
-     
             let internal = false
             let adapter =  {
                 'name':name,

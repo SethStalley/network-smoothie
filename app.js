@@ -10,7 +10,9 @@ const ipcMain = electron.ipcMain
 
 // Module to create native browser window.
 const BrowserWindow =  electron.BrowserWindow
+
 const isMac = process.platform === 'darwin'
+const isDev = process.env.NODE_ENV === 'dev'
 
 const path = require('path')
 const url = require('url')
@@ -23,24 +25,34 @@ const windows = new WindowsProxy()
 let mainWindow = null
 
 function createWindow () {
+  
   // Create the browser window.
   mainWindow = new BrowserWindow({
     backgroundColor: '#2f3241',
     width: 350, 
     height: 600,
-    resizable: false,
+    resizable: isDev,
     frame: isMac,
     show: false,
+    webPreferences: {
+      nodeIntegration: true
+    }
   })
 
-  if (process.env.NODE_ENV === 'dev') {
+  if (isDev) {
     // Open the DevTools.
     mainWindow.webContents.openDevTools()
+    require('electron-reload')(__dirname, {
+      electron: path.join(__dirname, 'node_modules', '.bin', 'electron')
+    })
   }
 
   mainWindow.once('ready-to-show', ()=> {
     mainWindow.show()
-    autoUpdater.checkForUpdates()
+    
+    if(!isDev) {
+      autoUpdater.checkForUpdates()
+    }
   })
 
   // and load the index.html of the app.
@@ -57,6 +69,7 @@ function createWindow () {
     // when you should delete the corresponding element.
     mainWindow = null    
   })
+
 }
 
 // This method will be called when Electron has finished
